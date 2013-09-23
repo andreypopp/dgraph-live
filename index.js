@@ -52,13 +52,14 @@ GraphLive.prototype = {
    */
   toStream: function() {
     var interceptor = through(function(mod) {
-      if (this.watching[mod.id]) return;
-      this.cache[mod.id] = mod;
-      this.watchModule(mod.id);
+      if (!this.watching[mod.id]) {
+        this.cache[mod.id] = mod;
+        this.watchModule(mod.id);
+      }
       interceptor.queue(mod);
     }.bind(this));
 
-    return new DGraph(this.mains, this.opts).toStream()
+    return (new DGraph(this.mains, this.opts)).toStream()
       .on('error', function(err) { interceptor.emit('error', err); })
       .pipe(interceptor);
   }
