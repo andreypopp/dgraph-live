@@ -1,6 +1,6 @@
 {
   "name": "dgraph-live",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Watch and report changes to sources in dgraph",
   "main": "index.js",
   "scripts": {
