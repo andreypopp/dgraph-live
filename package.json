@@ -1,0 +1,28 @@
+{
+  "name": "dgraph-live",
+  "version": "0.0.0",
+  "description": "Watch and report changes to sources in dgraph",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "andreypopp/dgraph-live"
+  },
+  "keywords": [
+    "dgraph",
+    "watch"
+  ],
+  "author": "Andrey Popp <8mayday@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "semver": "~2.1.0",
+    "jshint": "~2.1.11"
+  },
+  "dependencies": {
+    "through": "~2.3.4",
+    "lodash": "~2.1.0",
+    "dgraph": "~0.5.1"
+  }
+}
