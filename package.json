@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "through": "~2.3.4",
-    "lodash": "~2.1.0",
-    "dgraph": "~0.5.1"
+    "lodash": "2.x.x",
+    "dgraph": "0.x.x"
   }
 }
