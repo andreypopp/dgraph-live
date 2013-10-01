@@ -4,7 +4,7 @@
   "description": "Watch and report changes to sources in dgraph",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha -R spec specs.js"
   },
   "repository": {
     "type": "git",
@@ -18,11 +18,14 @@
   "license": "MIT",
   "devDependencies": {
     "semver": "~2.1.0",
-    "jshint": "~2.1.11"
+    "jshint": "~2.1.11",
+    "mocha": "~1.13.0",
+    "touch": "0.0.2"
   },
   "dependencies": {
-    "through": "~2.3.4",
+    "through": "2.x.x",
     "lodash": "2.x.x",
-    "dgraph": "0.x.x"
+    "dgraph": "0.7.x",
+    "stream-aggregate-promise": "~0.1.1"
   }
 }
