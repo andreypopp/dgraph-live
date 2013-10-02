@@ -38,10 +38,13 @@ GraphLive.prototype = {
 
   update: function(id, detected) {
     this.emit('update', id, detected);
+    this.watchModule(id);
   },
 
   watchModule: function(id) {
     this.watching[id] = fs.watch(id, function() {
+      this.watching[id].close();
+      this.watching[id] = undefined;
       this.graph.invalidateModule(id);
       this.update(id, Date.now());
     }.bind(this));
