@@ -26,6 +26,7 @@ describe('dgraph-live', function() {
     graph.on('update', function(id, when) {
       assert.equal(id, fixture('bar.js'));
       bundle(graph).then(function(mods) {
+        assert.equal(Object.keys(graph.watching).length, 3);
         graph.close();
         assert.equal(mods.length, 3);
         done();
@@ -44,6 +45,7 @@ describe('dgraph-live', function() {
     graph.on('update', function(id, when) {
       assert.equal(id, fixture('foo.js'));
       bundle(graph).then(function(bundle) {
+        assert.equal(Object.keys(graph.watching).length, 3);
         graph.close();
         assert.equal(bundle.length, 3);
         done();
