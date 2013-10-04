@@ -25,7 +25,7 @@
   "dependencies": {
     "through": "2.x.x",
     "lodash": "2.x.x",
-    "dgraph": "0.7.x",
+    "dgraph": "0.x.x",
     "stream-aggregate-promise": "~0.1.1"
   }
 }
