@@ -26,7 +26,9 @@ function GraphLive(graph, opts) {
 GraphLive.prototype = {
 
   needWatch: function(id) {
-    return this.opts.watchAll || !this.opts.watchAll && !id.match(/node_modules/)
+    return (this.opts.watchAll
+        || !this.opts.watchAll
+        && !id.match(/node_modules/));
   },
 
   close: function() {
