@@ -25,10 +25,9 @@ function GraphLive(graph, opts) {
 
 GraphLive.prototype = {
 
-  needWatch: function(id) {
-    return (this.opts.watchAll
-        || !this.opts.watchAll
-        && !id.match(/node_modules/));
+  needWatcher: function(id) {
+    return (this.opts.watchAll || !this.opts.watchAll &&
+      !id.match(/node_modules/));
   },
 
   close: function() {
@@ -54,7 +53,7 @@ GraphLive.prototype = {
 
   toStream: function() {
     var interceptor = through(function(mod) {
-      if (!this.watching[mod.id] && this.needWatch(mod.id))
+      if (!this.watching[mod.id] && this.needWatcher(mod.id))
         this.watchModule(mod.id);
       interceptor.queue(mod);
     }.bind(this));
