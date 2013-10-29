@@ -23,9 +23,8 @@
     "touch": "0.0.2"
   },
   "dependencies": {
-    "through": "2.x.x",
     "lodash": "2.x.x",
-    "dgraph": "0.x.x",
+    "dgraph": ">= 0.9.x",
     "stream-aggregate-promise": "~0.1.1"
   }
 }

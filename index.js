@@ -2,7 +2,6 @@
 
 var fs            = require('fs'),
     EventEmitter  = require('events').EventEmitter,
-    through       = require('through'),
     utils         = require('lodash');
 
 /**
@@ -17,10 +16,16 @@ function GraphLive(graph, opts) {
   this.graph = graph;
   this.opts = opts || {};
   this.watching = {};
+
   this.update = utils.debounce(
     this.update,
     this.opts.delay || 100,
     {maxWait: 1000});
+
+  this.graph.on('module', function(mod) {
+    if (!this.watching[mod.id] && this.needWatcher(mod.id))
+      this.watchModule(mod.id);
+  }.bind(this));
 }
 
 GraphLive.prototype = {
@@ -38,8 +43,8 @@ GraphLive.prototype = {
   },
 
   update: function(id, detected) {
-    this.emit('update', id, detected);
     this.watchModule(id);
+    this.emit('update', id, detected);
   },
 
   watchModule: function(id) {
@@ -51,16 +56,12 @@ GraphLive.prototype = {
     }.bind(this));
   },
 
-  toStream: function() {
-    var interceptor = through(function(mod) {
-      if (!this.watching[mod.id] && this.needWatcher(mod.id))
-        this.watchModule(mod.id);
-      interceptor.queue(mod);
-    }.bind(this));
+  toPromise: function() {
+    return this.graph.toPromise();
+  },
 
-    return this.graph.toStream()
-      .on('error', function(err) { interceptor.emit('error', err); })
-      .pipe(interceptor);
+  toStream: function() {
+    return this.graph.toStream();
   }
 };
 
